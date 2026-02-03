@@ -17,9 +17,11 @@
 
 ## 📚 Course Tracks
 The platform showcases structured learning paths for:
-* **Full Stack Web:** MERN (MongoDB, Express, React, Node) & PHP.
+* **Full Stack Web:** MERN (MongoDB, Express, React, Node).
 * **Mobile Dev:** Flutter & Dart, iOS & Android.
 * **Data Science:** Python, Pandas, Machine Learning.
 * **Enterprise:** C# & .NET Core.
+* **Backend Web:** PHP, Laravel, Symfony, MySQL.
+
 
 

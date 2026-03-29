@@ -44,23 +44,3 @@ if (themeToggleBtn) {
     });
 }
 
-// 3. Mobile Menu Logic
-const btn = document.getElementById('mobile-menu-button');
-const menu = document.getElementById('navbar-sticky');
-
-if (btn && menu) {
-    // Toggle menu visibility
-    btn.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-    });
-
-    // Close menu when clicking a link (Better UX)
-    const mobileLinks = menu.querySelectorAll('a');
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (!menu.classList.contains('hidden')) {
-                menu.classList.add('hidden');
-            }
-        });
-    });
-}

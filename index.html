@@ -62,13 +62,6 @@
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3 md:p-4">
 
             <div class="flex items-center gap-2">
-
-                <button data-collapse-toggle="navbar-sticky" type="button" id="mobile-menu-button"
-                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-                    <span class="sr-only">Open main menu</span>
-                    <i class="fa-solid fa-bars fa-lg"></i>
-                </button>
-
                 <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
                     <div
                         class="w-9 h-9 md:w-10 md:h-10 bg-primary rounded-lg flex items-center justify-center text-white">
@@ -100,9 +93,10 @@
                     <i class="fa-regular fa-bookmark md:mr-1"></i> <span class="hidden xs:inline">Save</span>
                 </button>
 
-                <button type="button"
-                    class="text-white bg-primary hover:bg-primary/90 focus:ring-4 focus:outline-none focus:ring-primary/50 font-medium rounded-lg text-xs md:text-sm px-3 py-2 md:px-5 md:py-2.5 text-center transition-all shadow-md">
-                    Get Started
+                <button type="button" id="mobile-menu-button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                    <span class="sr-only">Open main menu</span>
+                    <i class="fa-solid fa-bars fa-lg"></i>
                 </button>
             </div>
 
@@ -111,20 +105,50 @@
                     class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-secondary md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
                     <li><a href="#"
                             class="block py-2 px-3 text-white bg-primary rounded md:bg-transparent md:text-primary md:p-0"
-                            aria-current="page">Home</a></li>
+                            aria-current="page"><i class="fa-solid fa-house mr-2"></i>Home</a></li>
                     <li><a href="#courses"
-                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition">Courses</a>
+                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition"><i class="fa-solid fa-book-open mr-2"></i>Courses</a>
                     </li>
                     <li><a href="#about"
-                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition">About</a>
+                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition"><i class="fa-solid fa-circle-info mr-2"></i>About</a>
                     </li>
                     <li><a href="#pricing"
-                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition">Pricing</a>
+                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition"><i class="fa-solid fa-tags mr-2"></i>Pricing</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    <div id="mobile-menu-overlay" onclick="closeMobileMenu()"
+        class="fixed inset-y-0 left-0 w-[30vw] bg-primary/40 backdrop-blur-sm z-[90] hidden md:hidden transition-opacity duration-300">
+    </div>
+
+    <div class="fixed inset-y-0 top-0 right-0 z-[95] h-screen min-h-screen overflow-y-auto w-[70vw] max-w-none bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-700 transform translate-x-full transition-transform duration-300 ease-in-out p-6 pt-20 hidden md:hidden"
+        id="mobile-menu-drawer">
+        <button type="button" onclick="closeMobileMenu()"
+            class="absolute top-4 right-4 inline-flex items-center justify-center w-10 h-10 rounded-lg text-gray-500 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 transition"
+            aria-label="Close menu">
+            <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+
+        <ul class="flex flex-col p-0 mt-0 font-medium border-0 rounded-none bg-transparent space-y-2">
+            <li><a href="#" class="block py-2 px-3 text-white bg-primary rounded" aria-current="page"><i
+                        class="fa-solid fa-house mr-2"></i>Home</a></li>
+            <li><a href="#courses"
+                    class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 transition"><i
+                        class="fa-solid fa-book-open mr-2"></i>Courses</a>
+            </li>
+            <li><a href="#about"
+                    class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 transition"><i
+                        class="fa-solid fa-circle-info mr-2"></i>About</a>
+            </li>
+            <li><a href="#pricing"
+                    class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 transition"><i
+                        class="fa-solid fa-tags mr-2"></i>Pricing</a>
+            </li>
+        </ul>
+    </div>
 
     <main class="mt-16">
         <section
@@ -154,13 +178,13 @@
                     10,000+ learners today.
                 </p>
 
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <div class="flex flex-row justify-center items-center gap-4">
                     <a href="#courses"
-                        class="w-full sm:w-auto px-8 py-4 bg-primary text-white rounded-xl font-semibold text-lg hover:bg-primary/90 transform hover:-translate-y-1 transition duration-300 shadow-lg hover:shadow-primary/30">
+                        class="w-auto px-8 py-4 bg-primary text-white rounded-xl font-semibold text-lg hover:bg-primary/90 transform hover:-translate-y-1 transition duration-300 shadow-lg hover:shadow-primary/30">
                         Explore Courses
                     </a>
                     <a href="#about"
-                        class="w-full sm:w-auto px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-xl font-semibold text-lg hover:bg-secondary dark:hover:bg-gray-700 hover:text-primary transform hover:-translate-y-1 transition duration-300">
+                        class="w-auto px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-xl font-semibold text-lg hover:bg-secondary dark:hover:bg-gray-700 hover:text-primary transform hover:-translate-y-1 transition duration-300">
                         View Pricing
                     </a>
                 </div>

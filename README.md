@@ -19,7 +19,6 @@
 The platform showcases structured learning paths for:
 * **Full Stack Web:** MERN (MongoDB, Express, React, Node).
 * **Data Science:** Python, Pandas, Machine Learning.
-* **Enterprise:** C# & .NET Core.
 * **Backend Web:** PHP, Laravel, Symfony, MySQL.
 
 

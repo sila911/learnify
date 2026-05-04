@@ -94,6 +94,15 @@
 
         <div class="flex items-center gap-2 md:gap-3 md:order-2">
           <button
+            id="search-toggle"
+            type="button"
+            class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2 transition"
+            title="Search courses (Ctrl+K)"
+          >
+            <i class="fa-solid fa-magnifying-glass w-5 h-5"></i>
+          </button>
+
+          <button
             id="theme-toggle"
             type="button"
             class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2"
@@ -1418,6 +1427,62 @@
       </footer>
     </main>
 
+    <!-- Search Modal with Glassmorphism -->
+    <div
+      id="search-modal"
+      class="fixed inset-0 z-[200] hidden bg-black/40 backdrop-blur-md transition-opacity duration-300 flex items-start justify-center pt-20"
+      onclick="closeSearchModal(event)"
+    >
+      <div
+        class="w-full max-w-2xl mx-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 dark:border-gray-700/50 overflow-hidden transition-all duration-300"
+        onclick="event.stopPropagation()"
+      >
+        <!-- Search Input -->
+        <div class="p-6 border-b border-gray-200 dark:border-gray-700/50">
+          <div class="relative">
+            <i
+              class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+            ></i>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search courses (e.g., React, Python, JavaScript)..."
+              class="w-full pl-12 pr-6 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
+              autocomplete="off"
+            />
+          </div>
+        </div>
+
+        <!-- Results Container -->
+        <div id="search-results" class="max-h-96 overflow-y-auto">
+          <!-- Results will be populated here by JavaScript -->
+          <div class="p-6 text-center text-gray-500 dark:text-gray-400">
+            <p class="text-sm">Start typing to search courses...</p>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div
+          class="p-4 bg-gray-50 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700/50 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400"
+        >
+          <span
+            ><kbd
+              class="bg-white dark:bg-gray-700 px-2 py-1 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300"
+              >Esc</kbd
+            >
+            to close</span
+          >
+          <span
+            ><kbd
+              class="bg-white dark:bg-gray-700 px-2 py-1 rounded border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300"
+              >↑↓</kbd
+            >
+            to navigate</span
+          >
+        </div>
+      </div>
+    </div>
+
     <div
       id="successModal"
       class="fixed inset-0 z-[60] hidden"
@@ -1511,5 +1576,6 @@
     <script src="./js/contact-form.js"></script>
     <script src="./js/animations.js"></script>
     <script src="./js/index.js"></script>
+    <script src="./js/search.js" defer></script>
   </body>
 </html>

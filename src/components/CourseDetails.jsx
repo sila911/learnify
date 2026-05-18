@@ -148,10 +148,6 @@ const CourseDetails = ({ course, onBack, onStartLearning }) => {
               >
                 {course.curriculum ? 'Start Learning' : 'Enroll Now'}
               </button>
-              
-              <button className="w-full border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 py-4 rounded-xl font-bold transition hover:bg-gray-50 dark:hover:bg-gray-700">
-                Add to Favorites
-              </button>
 
               <div className="mt-8 pt-8 border-t border-gray-100 dark:border-gray-700 text-center">
                 <p className="text-sm text-gray-500 mb-4">Share this course</p>

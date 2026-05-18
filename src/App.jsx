@@ -5,7 +5,6 @@ import Layout from './components/Layout';
 import Hero from './components/Hero';
 import Logos from './components/Logos';
 import TrendingCourses from './components/TrendingCourses';
-import FeaturedCourses from './components/FeaturedCourses';
 import About from './components/About';
 import ContactSection from './components/ContactSection';
 import CourseDetails from './components/CourseDetails';
@@ -25,11 +24,26 @@ function App() {
   const handleCourseClick = (course) => {
     setSelectedCourse(course);
     setActiveVideo(null);
+    window.history.pushState({}, '', `/course/${course.id}`);
     window.scrollTo(0, 0);
   };
 
   const handleStartLearning = (video) => {
     setActiveVideo(video);
+    window.history.pushState({}, '', `/course/${selectedCourse.id}/video/${video.id}`);
+    window.scrollTo(0, 0);
+  };
+
+  const handleBackToHome = () => {
+    setSelectedCourse(null);
+    setActiveVideo(null);
+    window.history.pushState({}, '', '/');
+    window.scrollTo(0, 0);
+  };
+
+  const handleBackToCourse = () => {
+    setActiveVideo(null);
+    window.history.pushState({}, '', `/course/${selectedCourse.id}`);
     window.scrollTo(0, 0);
   };
 
@@ -39,12 +53,12 @@ function App() {
         <VideoPage 
           course={selectedCourse} 
           initialVideo={activeVideo} 
-          onBack={() => setActiveVideo(null)} 
+          onBack={handleBackToCourse} 
         />
       ) : selectedCourse ? (
         <CourseDetails 
           course={selectedCourse} 
-          onBack={() => setSelectedCourse(null)} 
+          onBack={handleBackToHome} 
           onStartLearning={handleStartLearning}
         />
       ) : (
@@ -52,7 +66,6 @@ function App() {
           <Hero />
           <Logos />
           <TrendingCourses onCourseClick={handleCourseClick} />
-          <FeaturedCourses onCourseClick={handleCourseClick} />
           <About />
           <ContactSection />
         </>

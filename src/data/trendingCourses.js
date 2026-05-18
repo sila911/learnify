@@ -122,5 +122,33 @@ export const trendingCourses = [
     duration: "6h 30m",
     tag: "Essential",
     link: "#"
+  },
+  {
+    id: 5,
+    title: "Data Structures & Algorithms in Java",
+    description: "Master the fundamentals of data structures and algorithms. Prepare for coding interviews and improve problem-solving skills.",
+    fullDescription: "Data structures and algorithms are the building blocks of efficient programming. This course will take you through the most important data structures (arrays, linked lists, stacks, queues, trees, graphs) and algorithms (sorting, searching, dynamic programming) using Java. You'll also get plenty of practice with coding problems that are commonly asked in technical interviews.",
+    learningPoints: [
+      "Core data structures and their implementations",
+      "Algorithm design and analysis",
+      "Time and space complexity considerations",
+      "Problem-solving strategies for coding interviews"
+    ],
+    curriculum: [
+      { id: 'v13', title: "Introduction to Data Structures", duration: "15:00", youtubeId: "exampleId6" },
+      { id: 'v14', title: "Algorithms Fundamentals", duration: "20:00", youtubeId: "exampleId7" }
+    ],
+    instructor: {
+      name: "Dara HENG",
+      role: "Java Developer",
+      avatar: "https://i.pinimg.com/736x/2a/cf/9a/2acf9a571bfc454d37877e2c5a136bda.jpg"
+    },
+    image: "https://i.pinimg.com/736x/ae/45/78/ae457871a5bef568338e8c73043afcf2.jpg",
+    category: "Programming",
+    rating: 4.9,
+    lessons: 28,
+    duration: "14h 00m",
+    tag: "Popular",
+    link: "#"
   }
 ];

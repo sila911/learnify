@@ -81,7 +81,7 @@ export const trendingCourses = [
     lessons: 42,
     duration: "28h 15m",
     tag: "Mobile",
-    link: "./course/flutter-course-detail.html"
+    link: "https://youtu.be/Sllp_eTV7Ks?si=zmEKCX4YqDp58JcH"
   },
   {
     id: 8,

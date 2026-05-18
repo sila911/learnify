@@ -5,6 +5,9 @@ export const featuredCourses = [
     description: "Master the visual web. Build responsive, beautiful websites using HTML5, CSS3, JavaScript, and Tailwind CSS.",
     category: "Frontend",
     lessons: 24,
+    rating: 4.9,
+    duration: "12h 30m",
+    link: "#",
     instructor: {
       name: "Sila SEM",
       role: "Web Instructor",
@@ -18,6 +21,9 @@ export const featuredCourses = [
     description: "The perfect starting point for coding. Learn syntax, variables, loops, and build your first real-world scripts.",
     category: "Python",
     lessons: 18,
+    rating: 4.8,
+    duration: "10h 15m",
+    link: "#",
     instructor: {
       name: "Dara HENG",
       role: "Python Expert",
@@ -31,6 +37,9 @@ export const featuredCourses = [
     description: "Dive deep into high-performance coding. Learn memory management, pointers, and object-oriented programming.",
     category: "C++",
     lessons: 30,
+    rating: 4.7,
+    duration: "15h 45m",
+    link: "#",
     instructor: {
       name: "Sodalin SUN",
       role: "Software Engineer",

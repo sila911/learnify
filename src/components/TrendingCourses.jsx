@@ -2,7 +2,7 @@ import React from 'react';
 import CourseCard from './CourseCard';
 import { trendingCourses } from '../data/trendingCourses';
 
-const TrendingCourses = () => {
+const TrendingCourses = ({ onCourseClick }) => {
   return (
     <section id="courses" className="py-20 bg-secondary dark:bg-gray-900 relative overflow-hidden transition-colors duration-300">
       <div
@@ -24,7 +24,11 @@ const TrendingCourses = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {trendingCourses.map((course) => (
-            <CourseCard key={course.id} course={course} />
+            <CourseCard 
+              key={course.id} 
+              course={course} 
+              onClick={() => onCourseClick(course)}
+            />
           ))}
         </div>
       </div>

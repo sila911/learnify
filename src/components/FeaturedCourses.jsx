@@ -2,7 +2,7 @@ import React from 'react';
 import FeaturedCourseCard from './FeaturedCourseCard';
 import { featuredCourses } from '../data/featuredCourses';
 
-const FeaturedCourses = () => {
+const FeaturedCourses = ({ onCourseClick }) => {
   return (
     <section className="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
       <div className="container mx-auto px-6">
@@ -12,7 +12,11 @@ const FeaturedCourses = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {featuredCourses.map((course) => (
-            <FeaturedCourseCard key={course.id} course={course} />
+            <FeaturedCourseCard 
+              key={course.id} 
+              course={course} 
+              onClick={() => onCourseClick(course)}
+            />
           ))}
         </div>
       </div>

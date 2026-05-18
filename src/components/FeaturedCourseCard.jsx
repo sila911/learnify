@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FeaturedCourseCard = ({ course }) => {
+const FeaturedCourseCard = ({ course, onClick }) => {
   const colorClasses = {
     blue: "text-blue-700 bg-blue-100",
     yellow: "text-yellow-700 bg-yellow-100",
@@ -17,7 +17,10 @@ const FeaturedCourseCard = ({ course }) => {
         <span className={`px-3 py-1 text-xs font-semibold rounded-full ${colorClasses[course.categoryStyle] || colorClasses.blue}`}>
           {course.category}
         </span>
-        <button className="text-gray-400 hover:text-primary transition">
+        <button 
+          className="text-gray-400 hover:text-primary transition"
+          onClick={(e) => e.stopPropagation()}
+        >
           <i className="fa-regular fa-bookmark"></i>
         </button>
       </div>
@@ -31,7 +34,10 @@ const FeaturedCourseCard = ({ course }) => {
         <span className="text-gray-400 text-xs">({course.rating})</span>
       </div>
 
-      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary transition cursor-pointer">
+      <h3 
+        className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary transition cursor-pointer"
+        onClick={onClick}
+      >
         {course.title}
       </h3>
       <p className="text-gray-600 dark:text-gray-400 text-sm mb-6 flex-grow line-clamp-2">
@@ -59,12 +65,12 @@ const FeaturedCourseCard = ({ course }) => {
             </p>
           </div>
         </div>
-        <a
-          href={course.link}
+        <button
+          onClick={onClick}
           className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary-hover transition shadow-sm"
         >
           Details
-        </a>
+        </button>
       </div>
     </div>
   );

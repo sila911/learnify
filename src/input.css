@@ -4,7 +4,10 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --font-moul: "Moul", sans-serif;
-    --color-primary: red;
-
+    --font-sans: "Inter", sans-serif;
+    --color-primary: #10b981; /* Emerald 500 */
+    --color-primary-hover: #059669; /* Emerald 600 */
+    --color-secondary: #f8fafc; /* Slate 50 */
+    --color-accent: #f59e0b; /* Amber 500 */
+    --color-dark-bg: #0f172a; /* Slate 900 */
 }

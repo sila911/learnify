@@ -45,31 +45,25 @@ const CourseDetails = ({ course, onBack }) => {
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">About This Course</h2>
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
-                {course.description}
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                {course.fullDescription || course.description}
               </p>
             </section>
 
-            <section className="bg-secondary dark:bg-gray-800 p-8 rounded-2xl border border-gray-100 dark:border-gray-700">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">What You'll Learn</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[
-                  "Master fundamental concepts",
-                  "Build real-world projects",
-                  "Industry best practices",
-                  "Advanced techniques",
-                  "Performance optimization",
-                  "Career guidance"
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <div className="mt-1 w-5 h-5 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
-                      <i className="fa-solid fa-check text-primary text-xs"></i>
+            {course.learningPoints && (
+              <section className="bg-secondary dark:bg-gray-800 p-8 rounded-2xl border border-gray-100 dark:border-gray-700">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">What You'll Learn</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {course.learningPoints.map((item, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <div className="mt-1 w-5 h-5 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i className="fa-solid fa-check text-primary text-xs"></i>
+                      </div>
+                      <span className="text-gray-700 dark:text-gray-300">{item}</span>
                     </div>
-                    <span className="text-gray-700 dark:text-gray-300">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </section>
+                  ))}
+                </div>
+              </section>
+            )}
 
             <section>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Instructor</h2>
@@ -83,7 +77,7 @@ const CourseDetails = ({ course, onBack }) => {
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white">{course.instructor?.name || 'Expert Instructor'}</h3>
                   <p className="text-primary font-medium mb-2">{course.instructor?.role || 'Senior Software Engineer'}</p>
                   <p className="text-gray-500 dark:text-gray-400 text-sm">
-                    Teaching over 50,000 students worldwide with a passion for web technologies and design.
+                    {course.instructor?.bio || "Teaching over 50,000 students worldwide with a passion for web technologies and design."}
                   </p>
                 </div>
               </div>

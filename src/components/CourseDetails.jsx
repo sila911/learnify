@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CourseDetails = ({ course, onBack }) => {
+const CourseDetails = ({ course, onBack, onStartLearning }) => {
   if (!course) return null;
 
   return (
@@ -82,6 +82,37 @@ const CourseDetails = ({ course, onBack }) => {
                 </div>
               </div>
             </section>
+
+            {course.curriculum && (
+              <section>
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Course Curriculum</h2>
+                  <span className="text-sm text-gray-500">{course.curriculum.length} Lessons</span>
+                </div>
+                <div className="space-y-3">
+                  {course.curriculum.map((video, index) => (
+                    <div 
+                      key={video.id}
+                      onClick={() => onStartLearning(video)}
+                      className="group flex items-center justify-between p-4 rounded-xl border border-gray-100 dark:border-gray-700 hover:border-primary/30 hover:bg-primary/5 transition cursor-pointer"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-full bg-gray-50 dark:bg-gray-800 flex items-center justify-center text-sm font-bold text-gray-400 group-hover:text-primary transition">
+                          {index + 1}
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-primary transition">{video.title}</h4>
+                          <span className="text-xs text-gray-500">Video • {video.duration}</span>
+                        </div>
+                      </div>
+                      <div className="text-gray-300 group-hover:text-primary transition">
+                        <i className="fa-solid fa-circle-play text-xl"></i>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
           </div>
 
           {/* Sidebar / Checkout */}
@@ -111,8 +142,11 @@ const CourseDetails = ({ course, onBack }) => {
                 </div>
               </div>
 
-              <button className="w-full bg-primary hover:bg-primary-hover text-white py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg shadow-primary/25 mb-4">
-                Enroll Now
+              <button 
+                onClick={() => onStartLearning(course.curriculum ? course.curriculum[0] : null)}
+                className="w-full bg-primary hover:bg-primary-hover text-white py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg shadow-primary/25 mb-4"
+              >
+                {course.curriculum ? 'Start Learning' : 'Enroll Now'}
               </button>
               
               <button className="w-full border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 py-4 rounded-xl font-bold transition hover:bg-gray-50 dark:hover:bg-gray-700">

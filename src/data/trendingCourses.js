@@ -12,6 +12,12 @@ export const trendingCourses = [
       "Building basic web scrapers",
       "Error handling and debugging best practices"
     ],
+    curriculum: [
+      { id: 'v1', title: "Introduction to Python", duration: "10:20", youtubeId: "rfscVS0vtbw" },
+      { id: 'v2', title: "Setting up Environment", duration: "15:45", youtubeId: "YYXdZ0dpCXQ" },
+      { id: 'v3', title: "Variables and Data Types", duration: "20:10", youtubeId: "khKwNjPnAQQ" },
+      { id: 'v4', title: "Control Flow: If/Else", duration: "12:30", youtubeId: "Zp5MuPOtsSY" }
+    ],
     instructor: {
       name: "Dara HENG",
       role: "Python Expert",
@@ -37,6 +43,11 @@ export const trendingCourses = [
       "Working with APIs and JSON data",
       "Functional programming concepts",
       "Tooling with Webpack and Babel"
+    ],
+    curriculum: [
+      { id: 'v5', title: "JS Fundamentals", duration: "12:45", youtubeId: "hdI2bqOjyQM" },
+      { id: 'v6', title: "Understanding the DOM", duration: "18:20", youtubeId: "01ys73ndT60" },
+      { id: 'v7', title: "Async/Await Explained", duration: "22:15", youtubeId: "V_Kr9OSfDeU" }
     ],
     instructor: {
       name: "Sila SEM",
@@ -64,6 +75,11 @@ export const trendingCourses = [
       "Performance optimization techniques",
       "Testing React components with Jest and RTL"
     ],
+    curriculum: [
+      { id: 'v8', title: "React Basics", duration: "15:30", youtubeId: "w7ejDZ8SWv8" },
+      { id: 'v9', title: "Hooks Deep Dive", duration: "25:00", youtubeId: "dpw9EHDh2bM" },
+      { id: 'v10', title: "State Management with Context", duration: "20:45", youtubeId: "5LrDIWkK_Bc" }
+    ],
     instructor: {
       name: "Sila SEM",
       role: "React Specialist",
@@ -89,6 +105,10 @@ export const trendingCourses = [
       "Working with remote repositories on GitHub",
       "Pull Request (PR) workflow and code reviews",
       "Using Git for open-source contributions"
+    ],
+    curriculum: [
+      { id: 'v11', title: "Git Basics", duration: "10:00", youtubeId: "8JJ101D3knE" },
+      { id: 'v12', title: "Branching and Merging", duration: "15:30", youtubeId: "oPpnCh7InLY" }
     ],
     instructor: {
       name: "Sodalin SUN",

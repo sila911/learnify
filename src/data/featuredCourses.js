@@ -12,6 +12,11 @@ export const featuredCourses = [
       "Building interactive UI components",
       "Web performance and accessibility (a11y)"
     ],
+    curriculum: [
+      { id: 'v13', title: "Web Basics: HTML & CSS", duration: "12:30", youtubeId: "mU6anWqZJcc" },
+      { id: 'v14', title: "CSS Flexbox & Grid", duration: "18:45", youtubeId: "3YW65K6ig0w" },
+      { id: 'v15', title: "JavaScript for Beginners", duration: "25:20", youtubeId: "W6NZfCO5SIk" }
+    ],
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1000&auto=format&fit=crop",
     category: "Frontend",
     lessons: 24,
@@ -38,6 +43,10 @@ export const featuredCourses = [
       "Working with strings and lists",
       "Building your first real-world automation scripts"
     ],
+    curriculum: [
+      { id: 'v16', title: "Why Python?", duration: "08:15", youtubeId: "Y8Tko2YC5hA" },
+      { id: 'v17', title: "Python Basics", duration: "15:40", youtubeId: "rfscVS0vtbw" }
+    ],
     image: "https://i.pinimg.com/736x/2a/cf/9a/2acf9a571bfc454d37877e2c5a136bda.jpg",
     category: "Python",
     lessons: 18,
@@ -63,6 +72,10 @@ export const featuredCourses = [
       "Templates and generic programming",
       "Standard Template Library (STL) overview",
       "Writing efficient, high-performance code"
+    ],
+    curriculum: [
+      { id: 'v18', title: "Introduction to C++", duration: "12:10", youtubeId: "vLnPwxZdW4Y" },
+      { id: 'v19', title: "Pointers and Memory", duration: "22:30", youtubeId: "rtgwvkaLzcI" }
     ],
     image: "https://i.pinimg.com/1200x/f1/8f/3c/f18f3c39b196ebfdf6ecf7ca543691c6.jpg",
     category: "C++",

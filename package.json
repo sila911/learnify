@@ -1,9 +1,19 @@
 {
   "dependencies": {
     "@tailwindcss/cli": "^4.1.14",
+    "aos": "^2.3.4",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
     "tailwindcss": "^4.1.14"
   },
   "scripts": {
-    "dev": "npx @tailwindcss/cli -i ./src/input.css -o ./src/output.css --watch"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.0",
+    "@vitejs/plugin-react": "^6.0.2",
+    "vite": "^8.0.13"
   }
 }

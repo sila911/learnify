@@ -16,7 +16,13 @@ const Layout = ({
   setIsSuccessOpen,
   savedCourses,
   onToggleSave,
-  onCourseClick
+  onCourseClick,
+  xp,
+  level,
+  currentLevelXP,
+  userName,
+  setUserName,
+  onLogoClick
 }) => {
   return (
     <div className="min-h-screen bg-secondary dark:bg-gray-900 text-gray-700 dark:text-white transition-colors duration-300">
@@ -24,6 +30,12 @@ const Layout = ({
         onSearchClick={() => setIsSearchOpen(true)}
         onSavedClick={() => setIsSavedOpen(true)}
         savedCount={savedCourses.length}
+        xp={xp}
+        level={level}
+        currentLevelXP={currentLevelXP}
+        userName={userName}
+        setUserName={setUserName}
+        onLogoClick={onLogoClick}
       />
 
       <main className="mt-16">

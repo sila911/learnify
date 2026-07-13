@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Navbar = ({ onSearchClick, onSavedClick, savedCount }) => {
+const Navbar = ({ onSearchClick, onSavedClick, savedCount, xp = 0, level = 1, currentLevelXP = 0, userName, setUserName, onLogoClick }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
@@ -55,7 +55,14 @@ const Navbar = ({ onSearchClick, onSavedClick, savedCount }) => {
         <div className="bg-white/80 dark:bg-gray-900/70 backdrop-blur-2xl border border-white/40 dark:border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.7),0_8px_30px_rgba(0,0,0,0.03)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.12),0_8px_30px_rgba(0,0,0,0.2)] rounded-full px-4 sm:px-6 transition-all duration-300">
           <div className="flex flex-wrap items-center justify-between mx-auto p-2 sm:p-3">
             <div className="flex items-center gap-2">
-              <a href="#" className="flex items-center space-x-2.5 rtl:space-x-reverse group">
+              <a 
+                href="#" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onLogoClick) onLogoClick();
+                }}
+                className="flex items-center space-x-2.5 rtl:space-x-reverse group"
+              >
                 <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white border border-white/20 shadow-sm transition-transform duration-300 group-hover:scale-105">
                   <i className="fa-solid fa-graduation-cap text-xs"></i>
                 </div>
@@ -104,6 +111,80 @@ const Navbar = ({ onSearchClick, onSavedClick, savedCount }) => {
                 )}
               </button>
 
+              {/* Gamified Level Indicator Badge */}
+              <div className="relative group/profile hidden sm:block">
+                <button
+                  type="button"
+                  className="flex items-center gap-2 bg-primary/10 hover:bg-primary/20 text-primary px-3 py-1.5 rounded-full border border-primary/20 transition text-xs md:text-sm font-bold focus:outline-none"
+                >
+                  <i className="fa-solid fa-trophy text-xs text-accent"></i>
+                  <span>Lvl {level}</span>
+                </button>
+                
+                {/* Profile & Leaderboard Dropdown */}
+                <div className="absolute right-0 mt-3 w-80 bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl shadow-xl p-5 opacity-0 invisible group-hover/profile:opacity-100 group-hover/profile:visible transition-all duration-300 z-50 transform translate-y-2 group-hover/profile:translate-y-0">
+                  <div className="flex items-center gap-3 border-b border-gray-100 dark:border-gray-700 pb-4 mb-4">
+                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white text-lg font-bold shrink-0">
+                      <i className="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div className="text-left">
+                      <div className="flex items-center gap-1.5 border-b border-transparent hover:border-gray-200 dark:hover:border-gray-700 focus-within:border-primary transition">
+                        <input
+                          type="text"
+                          value={userName}
+                          onChange={(e) => setUserName(e.target.value)}
+                          className="bg-transparent font-bold text-gray-900 dark:text-white text-sm w-36 py-0 px-0 outline-none"
+                          placeholder="Your Name"
+                          title="Click to edit name"
+                        />
+                        <i className="fa-solid fa-pen text-[9px] text-gray-400 pointer-events-none"></i>
+                      </div>
+                      <p className="text-xs text-gray-500">Student & Front-End Dev</p>
+                    </div>
+                  </div>
+                  
+                  {/* XP Progress Bar */}
+                  <div className="mb-4">
+                    <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1.5 font-medium">
+                      <span>XP Progress</span>
+                      <span>{currentLevelXP} / 1000 XP</span>
+                    </div>
+                    <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+                      <div 
+                        className="bg-primary h-2 rounded-full transition-all duration-500"
+                        style={{ width: `${(currentLevelXP / 1000) * 100}%` }}
+                      ></div>
+                    </div>
+                  </div>
+
+                  {/* Leaderboard */}
+                  <div className="text-left">
+                    <h5 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
+                      <i className="fa-solid fa-ranking-star"></i>
+                      Weekly Leaderboard
+                    </h5>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between items-center p-2 rounded-lg bg-gray-50/50 dark:bg-gray-900/50">
+                        <span className="font-medium text-gray-500">1. Dara HENG</span>
+                        <span className="font-bold text-gray-600 dark:text-gray-300">2,850 XP</span>
+                      </div>
+                      <div className="flex justify-between items-center p-2 rounded-lg bg-primary/10 border border-primary/20 text-primary font-bold">
+                        <span>2. {userName || 'You'} (You)</span>
+                        <span>{xp} XP</span>
+                      </div>
+                      <div className="flex justify-between items-center p-2 rounded-lg bg-gray-50/50 dark:bg-gray-900/50">
+                        <span className="font-medium text-gray-500">3. Sodalin SUN</span>
+                        <span className="font-bold text-gray-600 dark:text-gray-300">900 XP</span>
+                      </div>
+                      <div className="flex justify-between items-center p-2 rounded-lg bg-gray-50/50 dark:bg-gray-900/50">
+                        <span className="font-medium text-gray-500">4. Phirun MENG</span>
+                        <span className="font-bold text-gray-600 dark:text-gray-300">450 XP</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <button
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 type="button"
@@ -117,7 +198,15 @@ const Navbar = ({ onSearchClick, onSavedClick, savedCount }) => {
             <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
               <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-secondary md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
                 <li>
-                  <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition" aria-current="page">
+                  <a 
+                    href="#" 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (onLogoClick) onLogoClick();
+                    }}
+                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition" 
+                    aria-current="page"
+                  >
                     <i className="fa-solid fa-house mr-2"></i>Home
                   </a>
                 </li>
@@ -152,12 +241,18 @@ const Navbar = ({ onSearchClick, onSavedClick, savedCount }) => {
         className={`fixed inset-y-0 top-0 right-0 z-[95] h-full min-h-screen overflow-hidden w-[80vw] max-w-none bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-700 transform transition-transform duration-300 ease-in-out md:hidden flex flex-col ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-gray-700">
-          <div className="flex items-center gap-3">
+          <button
+            onClick={() => {
+              setIsMobileMenuOpen(false);
+              if (onLogoClick) onLogoClick();
+            }}
+            className="flex items-center gap-3 bg-transparent border-none outline-none cursor-pointer text-left"
+          >
             <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white border border-white/20 shadow-sm shrink-0">
               <i className="fa-solid fa-graduation-cap text-xs"></i>
             </div>
             <span className="text-xl font-bold text-gray-900 dark:text-white">Learnify</span>
-          </div>
+          </button>
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(false)}
@@ -165,6 +260,41 @@ const Navbar = ({ onSearchClick, onSavedClick, savedCount }) => {
           >
             <i className="fa-solid fa-xmark text-xl"></i>
           </button>
+        </div>
+
+        {/* Mobile Profile & XP */}
+        <div className="p-5 border-b border-gray-100 dark:border-gray-700 bg-gray-50/30 dark:bg-gray-800/30 text-left">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white text-lg font-bold shrink-0">
+              <i className="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div>
+              <div className="text-left">
+                <div className="flex items-center gap-1.5 border-b border-transparent hover:border-gray-200 dark:hover:border-gray-700 focus-within:border-primary transition mb-1">
+                  <input
+                    type="text"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                    className="bg-transparent font-bold text-gray-900 dark:text-white text-sm w-32 py-0 px-0 outline-none"
+                    placeholder="Your Name"
+                    title="Click to edit name"
+                  />
+                  <span className="text-[10px] font-bold bg-primary/20 text-primary px-1.5 py-0.5 rounded-full shrink-0">Lvl {level}</span>
+                </div>
+                <p className="text-xs text-gray-500">Student & Front-End Dev</p>
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-between text-[10px] text-gray-400 mb-1">
+            <span>Level {level} Progress</span>
+            <span>{currentLevelXP}/1000 XP</span>
+          </div>
+          <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
+            <div 
+              className="bg-primary h-1.5 rounded-full"
+              style={{ width: `${(currentLevelXP / 1000) * 100}%` }}
+            ></div>
+          </div>
         </div>
 
         {/* Quick Actions Row */}

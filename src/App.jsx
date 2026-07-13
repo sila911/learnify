@@ -60,6 +60,79 @@ function App() {
     }
   }, [selectedCourse, activeVideo]);
 
+  const [completedQuizzes, setCompletedQuizzes] = useState(() => {
+    try {
+      const saved = localStorage.getItem('learnify_completed_quizzes');
+      return saved ? JSON.parse(saved) : {};
+    } catch (e) {
+      return {};
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem('learnify_completed_quizzes', JSON.stringify(completedQuizzes));
+  }, [completedQuizzes]);
+
+  const [userName, setUserName] = useState(() => {
+    try {
+      return localStorage.getItem('learnify_username') || 'Sila SEM';
+    } catch (e) {
+      return 'Sila SEM';
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem('learnify_username', userName);
+  }, [userName]);
+
+  const [lastWatched, setLastWatched] = useState(() => {
+    try {
+      const saved = localStorage.getItem('learnify_last_watched');
+      return saved ? JSON.parse(saved) : null;
+    } catch (e) {
+      return null;
+    }
+  });
+
+  useEffect(() => {
+    if (selectedCourse && activeVideo) {
+      const info = {
+        courseId: selectedCourse.id,
+        videoId: activeVideo.id,
+        videoTitle: activeVideo.title
+      };
+      localStorage.setItem('learnify_last_watched', JSON.stringify(info));
+      setLastWatched(info);
+    }
+  }, [selectedCourse, activeVideo]);
+
+  const onResumeLearning = (courseId, videoId) => {
+    const course = trendingCourses.find(c => c.id === Number(courseId));
+    if (course) {
+      const video = course.curriculum.find(v => v.id === videoId);
+      if (video) {
+        setSelectedCourse(course);
+        setActiveVideo(video);
+        window.history.pushState({ learnify: true }, '', `/course/${courseId}/video/${videoId}`);
+        window.scrollTo(0, 0);
+      }
+    }
+  };
+
+  const handleQuizComplete = (courseId, score) => {
+    setCompletedQuizzes(prev => ({
+      ...prev,
+      [courseId]: score
+    }));
+  };
+
+  // Compute Gamified XP
+  const completedVideosCount = Object.values(completedVideos).reduce((acc, curr) => acc + curr.length, 0);
+  const completedQuizzesCount = Object.keys(completedQuizzes).length;
+  const totalXP = (completedVideosCount * 250) + (completedQuizzesCount * 500);
+  const userLevel = Math.floor(totalXP / 1000) + 1;
+  const currentLevelXP = totalXP % 1000;
+
   // Modal visibility states
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSavedOpen, setIsSavedOpen] = useState(false);
@@ -199,6 +272,12 @@ function App() {
       savedCourses={savedCourses}
       onToggleSave={handleToggleSave}
       onCourseClick={handleCourseClick}
+      xp={totalXP}
+      level={userLevel}
+      currentLevelXP={currentLevelXP}
+      userName={userName}
+      setUserName={setUserName}
+      onLogoClick={handleBackToHome}
     >
       {activeVideo ? (
         <VideoPage 
@@ -208,6 +287,7 @@ function App() {
           onBack={handleBackToCourse} 
           completedVideos={completedVideos}
           toggleVideoCompletion={toggleVideoCompletion}
+          onQuizComplete={handleQuizComplete}
         />
       ) : selectedCourse ? (
         <CourseDetails 
@@ -220,7 +300,7 @@ function App() {
         />
       ) : (
         <>
-          <Hero />
+          <Hero lastWatched={lastWatched} onResumeLearning={onResumeLearning} />
           <Logos />
           <TrendingCourses 
             onCourseClick={handleCourseClick} 

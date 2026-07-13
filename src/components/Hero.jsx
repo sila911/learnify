@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Hero = () => {
+const Hero = ({ lastWatched, onResumeLearning }) => {
   return (
     <section className="relative bg-gradient-to-b from-secondary to-white dark:from-gray-900 dark:to-gray-800 pt-20 pb-24 lg:pt-32 lg:pb-40 overflow-hidden transition-colors duration-300">
       <div className="container mx-auto px-6 text-center relative z-10">
@@ -37,16 +37,25 @@ const Hero = () => {
         <div className="flex flex-row justify-center items-center gap-3 sm:gap-4 mx-auto">
           <a
             href="#pricing"
-            className="w-auto px-5 py-3 sm:px-8 sm:py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-xl font-semibold text-sm sm:text-lg hover:bg-secondary dark:hover:bg-gray-700 hover:text-primary transform hover:-translate-y-1 transition duration-300 text-center"
+            className="w-auto px-5 py-3 sm:px-8 sm:py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-xl font-semibold text-sm sm:text-lg hover:bg-secondary dark:hover:bg-gray-700 hover:text-primary transform hover:-translate-y-1 transition duration-300 text-center animate-pulse-subtle"
           >
             View Pricing
           </a>
-          <a
-            href="#courses"
-            className="w-auto px-5 py-3 sm:px-8 sm:py-4 bg-primary text-white rounded-xl font-semibold text-sm sm:text-lg hover:bg-primary/90 transform hover:-translate-y-1 transition duration-300 shadow-lg hover:shadow-primary/30 text-center"
-          >
-            Explore Courses
-          </a>
+          {lastWatched ? (
+            <button
+              onClick={() => onResumeLearning(lastWatched.courseId, lastWatched.videoId)}
+              className="w-auto px-5 py-3 sm:px-8 sm:py-4 bg-primary text-white rounded-xl font-semibold text-sm sm:text-lg hover:bg-primary/90 transform hover:-translate-y-1 transition duration-300 shadow-lg hover:shadow-primary/30 text-center cursor-pointer"
+            >
+              Resume: {lastWatched.videoTitle.length > 20 ? lastWatched.videoTitle.substring(0, 18) + '...' : lastWatched.videoTitle}
+            </button>
+          ) : (
+            <a
+              href="#courses"
+              className="w-auto px-5 py-3 sm:px-8 sm:py-4 bg-primary text-white rounded-xl font-semibold text-sm sm:text-lg hover:bg-primary/90 transform hover:-translate-y-1 transition duration-300 shadow-lg hover:shadow-primary/30 text-center"
+            >
+              Explore Courses
+            </a>
+          )}
         </div>
       </div>
 

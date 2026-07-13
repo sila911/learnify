@@ -2,7 +2,7 @@ import React from 'react';
 import CourseCard from './CourseCard';
 import { trendingCourses } from '../data/trendingCourses';
 
-const TrendingCourses = ({ onCourseClick }) => {
+const TrendingCourses = ({ onCourseClick, savedCourses, onToggleSave, completedVideos }) => {
   return (
     <section id="courses" className="py-20 bg-secondary dark:bg-gray-900 relative overflow-hidden transition-colors duration-300">
       <div
@@ -28,6 +28,12 @@ const TrendingCourses = ({ onCourseClick }) => {
               key={course.id} 
               course={course} 
               onClick={() => onCourseClick(course)}
+              isSaved={(savedCourses || []).includes(course.id)}
+              onToggleSave={(e) => {
+                e.stopPropagation();
+                onToggleSave(course.id);
+              }}
+              completedVideos={completedVideos}
             />
           ))}
         </div>

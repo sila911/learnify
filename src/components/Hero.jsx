@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Hero = () => {
+const Hero = ({ lastWatched, onResumeLearning }) => {
   return (
     <section className="relative bg-gradient-to-b from-secondary to-white dark:from-gray-900 dark:to-gray-800 pt-20 pb-24 lg:pt-32 lg:pb-40 overflow-hidden transition-colors duration-300">
       <div className="container mx-auto px-6 text-center relative z-10">
@@ -18,7 +18,7 @@ const Hero = () => {
         <h1
           data-aos="fade-up"
           data-aos-delay="100"
-          className="text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-6 leading-tight"
+          className="text-4xl md:text-7xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-6 leading-tight"
         >
           Upgrade your skills,<br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400">
@@ -34,19 +34,28 @@ const Hero = () => {
           Learn from industry experts, master new skills, and achieve your goals at your own pace. Join 10,000+ learners today.
         </p>
 
-        <div className="flex flex-row justify-center items-center gap-4">
-          <a
-            href="#courses"
-            className="w-auto px-8 py-4 bg-primary text-white rounded-xl font-semibold text-lg hover:bg-primary/90 transform hover:-translate-y-1 transition duration-300 shadow-lg hover:shadow-primary/30"
-          >
-            Explore Courses
-          </a>
+        <div className="flex flex-row justify-center items-center gap-3 sm:gap-4 mx-auto">
           <a
             href="#pricing"
-            className="w-auto px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-xl font-semibold text-lg hover:bg-secondary dark:hover:bg-gray-700 hover:text-primary transform hover:-translate-y-1 transition duration-300"
+            className="w-auto px-5 py-3 sm:px-8 sm:py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-xl font-semibold text-sm sm:text-lg hover:bg-secondary dark:hover:bg-gray-700 hover:text-primary transform hover:-translate-y-1 transition duration-300 text-center animate-pulse-subtle"
           >
             View Pricing
           </a>
+          {lastWatched ? (
+            <button
+              onClick={() => onResumeLearning(lastWatched.courseId, lastWatched.videoId)}
+              className="w-auto px-5 py-3 sm:px-8 sm:py-4 bg-primary text-white rounded-xl font-semibold text-sm sm:text-lg hover:bg-primary/90 transform hover:-translate-y-1 transition duration-300 shadow-lg hover:shadow-primary/30 text-center cursor-pointer"
+            >
+              Resume: {lastWatched.videoTitle.length > 20 ? lastWatched.videoTitle.substring(0, 18) + '...' : lastWatched.videoTitle}
+            </button>
+          ) : (
+            <a
+              href="#courses"
+              className="w-auto px-5 py-3 sm:px-8 sm:py-4 bg-primary text-white rounded-xl font-semibold text-sm sm:text-lg hover:bg-primary/90 transform hover:-translate-y-1 transition duration-300 shadow-lg hover:shadow-primary/30 text-center"
+            >
+              Explore Courses
+            </a>
+          )}
         </div>
       </div>
 

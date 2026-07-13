@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const VideoPage = ({ course, initialVideo, onBack }) => {
-  const [activeVideo, setActiveVideo] = useState(initialVideo || course.curriculum[0]);
+const VideoPage = ({ course, activeVideo, onVideoChange, onBack }) => {
   const [note, setNote] = useState('');
 
   // Storage key: learnify_notes_{courseId}_{videoId}
@@ -20,6 +19,18 @@ const VideoPage = ({ course, initialVideo, onBack }) => {
     localStorage.setItem(storageKey, value);
   };
 
+  const currentIdx = course.curriculum.findIndex(v => v.id === activeVideo.id);
+  const nextVideo = currentIdx !== -1 && currentIdx < course.curriculum.length - 1 
+    ? course.curriculum[currentIdx + 1] 
+    : null;
+
+  const handleNextUp = () => {
+    if (nextVideo) {
+      onVideoChange(nextVideo);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="bg-gray-50 dark:bg-gray-950 min-h-screen pt-20 pb-12">
       <div className="container mx-auto px-6">
@@ -31,7 +42,7 @@ const VideoPage = ({ course, initialVideo, onBack }) => {
               className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-primary transition group mb-2"
             >
               <i className="fa-solid fa-arrow-left group-hover:-translate-x-1 transition"></i>
-              Back to Course Details
+              Back
             </button>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
               {course.title}
@@ -106,7 +117,7 @@ const VideoPage = ({ course, initialVideo, onBack }) => {
                   <button
                     key={video.id}
                     onClick={() => {
-                      setActiveVideo(video);
+                      onVideoChange(video);
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }}
                     className={`w-full flex items-center gap-4 p-4 text-left border-b border-gray-50 dark:border-gray-700 transition hover:bg-gray-50 dark:hover:bg-gray-700 ${activeVideo.id === video.id ? 'bg-primary/5 border-l-4 border-l-primary' : 'border-l-4 border-l-transparent'}`}
@@ -129,8 +140,16 @@ const VideoPage = ({ course, initialVideo, onBack }) => {
                 ))}
               </div>
               <div className="p-6 bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-700">
-                <button className="w-full py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl text-sm font-bold hover:opacity-90 transition shadow-md">
-                   Next Up
+                <button
+                  onClick={handleNextUp}
+                  disabled={!nextVideo}
+                  className={`w-full py-3 rounded-xl text-sm font-bold transition shadow-md ${
+                    nextVideo 
+                      ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900 hover:opacity-90' 
+                      : 'bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed'
+                  }`}
+                >
+                   {nextVideo ? 'Next Up' : 'Course Completed!'}
                 </button>
               </div>
             </div>

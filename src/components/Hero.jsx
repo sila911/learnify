@@ -18,7 +18,7 @@ const Hero = () => {
         <h1
           data-aos="fade-up"
           data-aos-delay="100"
-          className="text-5xl md:text-7xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-6 leading-tight"
+          className="text-4xl md:text-7xl font-extrabold text-gray-900 dark:text-white tracking-tight mb-6 leading-tight"
         >
           Upgrade your skills,<br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400">
@@ -34,16 +34,16 @@ const Hero = () => {
           Learn from industry experts, master new skills, and achieve your goals at your own pace. Join 10,000+ learners today.
         </p>
 
-        <div className="flex flex-row justify-center items-center gap-4">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-md sm:max-w-none mx-auto">
           <a
             href="#courses"
-            className="w-auto px-8 py-4 bg-primary text-white rounded-xl font-semibold text-lg hover:bg-primary/90 transform hover:-translate-y-1 transition duration-300 shadow-lg hover:shadow-primary/30"
+            className="w-full sm:w-auto px-8 py-4 bg-primary text-white rounded-xl font-semibold text-lg hover:bg-primary/90 transform hover:-translate-y-1 transition duration-300 shadow-lg hover:shadow-primary/30 text-center"
           >
             Explore Courses
           </a>
           <a
             href="#pricing"
-            className="w-auto px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-xl font-semibold text-lg hover:bg-secondary dark:hover:bg-gray-700 hover:text-primary transform hover:-translate-y-1 transition duration-300"
+            className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-xl font-semibold text-lg hover:bg-secondary dark:hover:bg-gray-700 hover:text-primary transform hover:-translate-y-1 transition duration-300 text-center"
           >
             View Pricing
           </a>

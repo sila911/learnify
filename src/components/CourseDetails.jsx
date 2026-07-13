@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CourseDetails = ({ course, onBack, onStartLearning }) => {
+const CourseDetails = ({ course, onBack, onStartLearning, isSaved, onToggleSave }) => {
   if (!course) return null;
 
   return (
@@ -19,7 +19,7 @@ const CourseDetails = ({ course, onBack, onStartLearning }) => {
               className="mb-6 flex items-center gap-2 text-white/80 hover:text-white transition group"
             >
               <i className="fa-solid fa-arrow-left group-hover:-translate-x-1 transition"></i>
-              Back to Courses
+              Back
             </button>
             <div className="flex items-center gap-2 mb-4">
               <span className="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
@@ -70,7 +70,7 @@ const CourseDetails = ({ course, onBack, onStartLearning }) => {
               <div className="flex items-center gap-6 p-6 border border-gray-100 dark:border-gray-700 rounded-2xl">
                 <img
                   src={course.instructor?.avatar || 'https://i.pravatar.cc/150'}
-                  className="w-20 h-20 rounded-full object-cover border-4 border-white dark:border-gray-800 shadow-md"
+                  className="w-20 h-20 rounded-full object-cover border-4 border-white dark:border-gray-800 shadow-md shrink-0"
                   alt={course.instructor?.name || 'Instructor'}
                 />
                 <div>
@@ -116,7 +116,7 @@ const CourseDetails = ({ course, onBack, onStartLearning }) => {
           </div>
 
           {/* Sidebar / Checkout */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 order-first lg:order-last">
             <div className="sticky top-24 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700">
               <div className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
                 Free
@@ -142,12 +142,25 @@ const CourseDetails = ({ course, onBack, onStartLearning }) => {
                 </div>
               </div>
 
-              <button 
-                onClick={() => onStartLearning(course.curriculum ? course.curriculum[0] : null)}
-                className="w-full bg-primary hover:bg-primary-hover text-white py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg shadow-primary/25 mb-4"
-              >
-                {course.curriculum ? 'Start Learning' : 'Enroll Now'}
-              </button>
+              <div className="flex gap-4 mb-4">
+                <button 
+                  onClick={() => onStartLearning(course.curriculum ? course.curriculum[0] : null)}
+                  className="flex-grow bg-primary hover:bg-primary-hover text-white py-4 rounded-xl font-bold text-lg transition-all duration-300 shadow-lg shadow-primary/25"
+                >
+                  {course.curriculum ? 'Start Learning' : 'Enroll Now'}
+                </button>
+                <button
+                  onClick={onToggleSave}
+                  className={`w-14 rounded-xl border flex items-center justify-center transition-all duration-300 text-xl ${
+                    isSaved 
+                      ? 'bg-primary/10 border-primary text-primary hover:bg-primary/25' 
+                      : 'border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'
+                  }`}
+                  title={isSaved ? "Remove from saved" : "Save course"}
+                >
+                  <i className={`${isSaved ? 'fa-solid' : 'fa-regular'} fa-bookmark`}></i>
+                </button>
+              </div>
 
               <div className="mt-8 pt-8 border-t border-gray-100 dark:border-gray-700 text-center">
                 <p className="text-sm text-gray-500 mb-4">Share this course</p>

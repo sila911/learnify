@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-const Navbar = ({ onSearchClick, onSavedClick }) => {
+const Navbar = ({ onSearchClick, onSavedClick, savedCount }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     if (
@@ -18,6 +20,20 @@ const Navbar = ({ onSearchClick, onSavedClick }) => {
     }
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 80) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      setLastScrollY(currentScrollY);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
+
   const toggleTheme = () => {
     if (isDarkMode) {
       document.documentElement.classList.remove('dark');
@@ -32,86 +48,96 @@ const Navbar = ({ onSearchClick, onSavedClick }) => {
 
   return (
     <>
-      <nav className="fixed w-full z-50 top-0 start-0 border-b border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md transition-colors duration-300">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-3 md:p-4">
-          <div className="flex items-center gap-2">
-            <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
-              <div className="w-9 h-9 md:w-10 md:h-10 bg-primary rounded-lg flex items-center justify-center text-white">
-                <i className="fa-solid fa-graduation-cap md:fa-lg"></i>
-              </div>
-              <span className="hidden md:block self-center text-2xl font-bold whitespace-nowrap text-gray-900 dark:text-white">
-                Learnify
-              </span>
-            </a>
-          </div>
+      <nav 
+        className="fixed top-2.5 left-4 right-4 z-50 max-w-6xl mx-auto font-sans transition-all duration-300"
+        style={{ transform: isVisible ? 'translateY(0)' : 'translateY(-120%)', transition: 'transform 0.4s ease-in-out' }}
+      >
+        <div className="bg-white/80 dark:bg-gray-900/70 backdrop-blur-2xl border border-white/40 dark:border-white/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.7),0_8px_30px_rgba(0,0,0,0.03)] dark:shadow-[inset_0_1px_1px_rgba(255,255,255,0.12),0_8px_30px_rgba(0,0,0,0.2)] rounded-full px-4 sm:px-6 transition-all duration-300">
+          <div className="flex flex-wrap items-center justify-between mx-auto p-2 sm:p-3">
+            <div className="flex items-center gap-2">
+              <a href="#" className="flex items-center space-x-2.5 rtl:space-x-reverse group">
+                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white border border-white/20 shadow-sm transition-transform duration-300 group-hover:scale-105">
+                  <i className="fa-solid fa-graduation-cap text-xs"></i>
+                </div>
+                <span className="hidden md:block self-center text-xl font-bold tracking-tight text-gray-900 dark:text-white group-hover:text-primary transition-colors duration-300">
+                  Learnify
+                </span>
+              </a>
+            </div>
 
-          <div className="flex items-center gap-2 md:gap-3 md:order-2">
-            <button
-              onClick={onSearchClick}
-              type="button"
-              className="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2 transition"
-              title="Search courses (Ctrl+K)"
-            >
-              <i className="fa-solid fa-magnifying-glass w-5 h-5"></i>
-            </button>
+            <div className="flex items-center gap-2 md:gap-3 md:order-2">
+              <button
+                onClick={onSearchClick}
+                type="button"
+                className="hidden sm:block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2 transition"
+                title="Search courses (Ctrl+K)"
+              >
+                <i className="fa-solid fa-magnifying-glass w-5 h-5"></i>
+              </button>
 
-            <button
-              onClick={toggleTheme}
-              type="button"
-              className="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2"
-            >
-              {isDarkMode ? (
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fillRule="evenodd" clipRule="evenodd"></path>
-                </svg>
-              ) : (
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                </svg>
-              )}
-            </button>
+              <button
+                onClick={toggleTheme}
+                type="button"
+                className="hidden sm:block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2"
+              >
+                {isDarkMode ? (
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fillRule="evenodd" clipRule="evenodd"></path>
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                  </svg>
+                )}
+              </button>
 
-            <button
-              onClick={onSavedClick}
-              className="bg-gray-800 hover:bg-gray-700 text-white px-3 py-2 md:px-4 md:py-2 rounded-lg border border-gray-700 transition text-xs md:text-sm font-medium"
-            >
-              <i className="fa-regular fa-bookmark md:mr-1"></i>
-              <span className="hidden xs:inline">Save</span>
-            </button>
+              <button
+                onClick={onSavedClick}
+                className="hidden sm:flex bg-gray-800 hover:bg-gray-700 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-gray-700 transition text-xs md:text-sm font-medium items-center gap-1.5"
+              >
+                <i className="fa-regular fa-bookmark"></i>
+                <span>Save</span>
+                {savedCount > 0 && (
+                  <span className="bg-primary text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+                    {savedCount}
+                  </span>
+                )}
+              </button>
 
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              type="button"
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            >
-              <span className="sr-only">Open main menu</span>
-              <i className="fa-solid fa-bars fa-lg"></i>
-            </button>
-          </div>
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                type="button"
+                className="inline-flex items-center p-2 w-10 h-10 justify-center text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              >
+                <span className="sr-only">Open main menu</span>
+                <i className="fa-solid fa-bars fa-lg"></i>
+              </button>
+            </div>
 
-          <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-secondary md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
-              <li>
-                <a href="#" className="block py-2 px-3 text-white bg-primary rounded md:bg-transparent md:text-primary md:p-0" aria-current="page">
-                  <i className="fa-solid fa-house mr-2"></i>Home
-                </a>
-              </li>
-              <li>
-                <a href="#courses" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition">
-                  <i className="fa-solid fa-book-open mr-2"></i>Courses
-                </a>
-              </li>
-              <li>
-                <a href="#about" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition">
-                  <i className="fa-solid fa-circle-info mr-2"></i>About
-                </a>
-              </li>
-              <li>
-                <a href="#pricing" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition">
-                  <i className="fa-solid fa-tags mr-2"></i>Pricing
-                </a>
-              </li>
-            </ul>
+            <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+              <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-secondary md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-800 md:dark:bg-transparent dark:border-gray-700">
+                <li>
+                  <a href="#" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition" aria-current="page">
+                    <i className="fa-solid fa-house mr-2"></i>Home
+                  </a>
+                </li>
+                <li>
+                  <a href="#courses" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition">
+                    <i className="fa-solid fa-book-open mr-2"></i>Courses
+                  </a>
+                </li>
+                <li>
+                  <a href="#about" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition">
+                    <i className="fa-solid fa-circle-info mr-2"></i>About
+                  </a>
+                </li>
+                <li>
+                  <a href="#pricing" className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-primary md:p-0 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition">
+                    <i className="fa-solid fa-tags mr-2"></i>Pricing
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </nav>
@@ -127,8 +153,8 @@ const Navbar = ({ onSearchClick, onSavedClick }) => {
       >
         <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-gray-700">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center text-white">
-              <i className="fa-solid fa-graduation-cap"></i>
+            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white border border-white/20 shadow-sm shrink-0">
+              <i className="fa-solid fa-graduation-cap text-xs"></i>
             </div>
             <span className="text-xl font-bold text-gray-900 dark:text-white">Learnify</span>
           </div>
@@ -138,6 +164,48 @@ const Navbar = ({ onSearchClick, onSavedClick }) => {
             className="inline-flex items-center justify-center w-10 h-10 rounded-lg text-gray-500 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 transition"
           >
             <i className="fa-solid fa-xmark text-xl"></i>
+          </button>
+        </div>
+
+        {/* Quick Actions Row */}
+        <div className="grid grid-cols-3 gap-2 p-5 border-b border-gray-100 dark:border-gray-700">
+          <button
+            onClick={() => {
+              setIsMobileMenuOpen(false);
+              onSearchClick();
+            }}
+            className="flex flex-col items-center justify-center p-3 rounded-xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition"
+          >
+            <i className="fa-solid fa-magnifying-glass mb-1.5 text-lg"></i>
+            <span className="text-xs font-medium">Search</span>
+          </button>
+
+          <button
+            onClick={() => {
+              setIsMobileMenuOpen(false);
+              onSavedClick();
+            }}
+            className="relative flex flex-col items-center justify-center p-3 rounded-xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition"
+          >
+            <i className="fa-solid fa-bookmark mb-1.5 text-lg"></i>
+            <span className="text-xs font-medium">Saved</span>
+            {savedCount > 0 && (
+              <span className="absolute top-2 right-4 bg-primary text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+                {savedCount}
+              </span>
+            )}
+          </button>
+
+          <button
+            onClick={toggleTheme}
+            className="flex flex-col items-center justify-center p-3 rounded-xl bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400 transition"
+          >
+            {isDarkMode ? (
+              <i className="fa-solid fa-sun mb-1.5 text-lg text-amber-500"></i>
+            ) : (
+              <i className="fa-solid fa-moon mb-1.5 text-lg text-purple-600"></i>
+            )}
+            <span className="text-xs font-medium">{isDarkMode ? 'Light' : 'Dark'}</span>
           </button>
         </div>
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ContactSection = () => {
+const ContactSection = ({ onSuccess }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -20,6 +20,7 @@ const ContactSection = () => {
     setTimeout(() => {
       setStatus('success');
       setFormData({ name: '', email: '', message: '' });
+      if (onSuccess) onSuccess();
     }, 1500);
   };
 
@@ -35,7 +36,7 @@ const ContactSection = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-10" data-aos="fade-down">
-          <h2 className="text-4xl font-extrabold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-4">
             Get in Touch
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400">
@@ -46,7 +47,7 @@ const ContactSection = () => {
         <div
           data-aos="zoom-in-up"
           data-aos-duration="1000"
-          className="max-w-2xl mx-auto bg-white dark:bg-gray-800 p-8 md:p-12 rounded-3xl border border-gray-200 dark:border-gray-700 shadow-xl"
+          className="max-w-2xl mx-auto bg-white dark:bg-gray-800 p-6 sm:p-8 md:p-12 rounded-3xl border border-gray-200 dark:border-gray-700 shadow-xl"
         >
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
             <div className="flex flex-col">

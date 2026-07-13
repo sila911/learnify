@@ -135,8 +135,8 @@ export const trendingCourses = [
       "Problem-solving strategies for coding interviews"
     ],
     curriculum: [
-      { id: 'v13', title: "Introduction to Data Structures", duration: "15:00", youtubeId: "exampleId6" },
-      { id: 'v14', title: "Algorithms Fundamentals", duration: "20:00", youtubeId: "exampleId7" }
+      { id: 'v13', title: "Introduction to Data Structures", duration: "15:00", youtubeId: "zg9ih6SVupc" },
+      { id: 'v14', title: "Algorithms Fundamentals", duration: "20:00", youtubeId: "U85F_yG9gqg" }
     ],
     instructor: {
       name: "Dara HENG",

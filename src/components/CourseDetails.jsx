@@ -1,7 +1,10 @@
 import React from 'react';
 
-const CourseDetails = ({ course, onBack, onStartLearning, isSaved, onToggleSave }) => {
+const CourseDetails = ({ course, onBack, onStartLearning, isSaved, onToggleSave, completedVideos }) => {
   if (!course) return null;
+  const completedCount = completedVideos && completedVideos[course.id] ? completedVideos[course.id].length : 0;
+  const totalCount = course.curriculum ? course.curriculum.length : 0;
+  const progressPercent = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
   return (
     <div className="bg-white dark:bg-gray-900 min-h-screen pb-20">
@@ -122,6 +125,21 @@ const CourseDetails = ({ course, onBack, onStartLearning, isSaved, onToggleSave 
                 Free
                 <span className="text-lg font-normal text-gray-400 line-through ml-3">$99.99</span>
               </div>
+
+              {completedCount > 0 && (
+                <div className="mb-6 p-4 rounded-xl bg-primary/5 border border-primary/10">
+                  <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-2 font-medium">
+                    <span>Overall Progress: {progressPercent}%</span>
+                    <span>{completedCount}/{totalCount} watched</span>
+                  </div>
+                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+                    <div 
+                      className="bg-primary h-2 rounded-full transition-all duration-500" 
+                      style={{ width: `${progressPercent}%` }}
+                    ></div>
+                  </div>
+                </div>
+              )}
 
               <div className="space-y-4 mb-8">
                 <div className="flex justify-between text-sm">

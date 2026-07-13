@@ -29,7 +29,27 @@ export const trendingCourses = [
     lessons: 18,
     duration: "8h 30m",
     tag: "Best Viewer",
-    link: "#"
+    link: "#",
+    quiz: [
+      {
+        id: 'q1_1',
+        question: "What is the correct output of print(type([])) in Python?",
+        options: ["<class 'tuple'>", "<class 'list'>", "<class 'dict'>", "<class 'set'>"],
+        answer: 1
+      },
+      {
+        id: 'q1_2',
+        question: "Which keyword is used to define a custom function in Python?",
+        options: ["func", "define", "def", "function"],
+        answer: 2
+      },
+      {
+        id: 'q1_3',
+        question: "How do you write comments in Python code?",
+        options: ["// this is a comment", "/* this is a comment */", "# this is a comment", "<!-- this is a comment -->"],
+        answer: 2
+      }
+    ]
   },
   {
     id: 2,
@@ -60,7 +80,27 @@ export const trendingCourses = [
     lessons: 32,
     duration: "14h 45m",
     tag: "Essential",
-    link: "#"
+    link: "#",
+    quiz: [
+      {
+        id: 'q2_1',
+        question: "Which of the following is NOT a native JavaScript data type?",
+        options: ["Undefined", "Boolean", "Float", "String"],
+        answer: 2
+      },
+      {
+        id: 'q2_2',
+        question: "Which keyword declares a block-scoped local variable in modern JavaScript (ES6)?",
+        options: ["var", "let", "global", "define"],
+        answer: 1
+      },
+      {
+        id: 'q2_3',
+        question: "What does the strict equality (===) operator check in JavaScript?",
+        options: ["Value equality only", "Type equality only", "Both value and type equality", "Assignment"],
+        answer: 2
+      }
+    ]
   },
   {
     id: 3,
@@ -91,7 +131,27 @@ export const trendingCourses = [
     lessons: 24,
     duration: "10h 15m",
     tag: "Popular",
-    link: "#"
+    link: "#",
+    quiz: [
+      {
+        id: 'q3_1',
+        question: "Which React hook is used to perform side effects in functional components?",
+        options: ["useState", "useContext", "useEffect", "useReducer"],
+        answer: 2
+      },
+      {
+        id: 'q3_2',
+        question: "What is the primary purpose of keys in React lists?",
+        options: ["To uniquely identify items and help React track updates", "To style components", "To bind events", "To generate unique numbers"],
+        answer: 0
+      },
+      {
+        id: 'q3_3',
+        question: "Can functional components hold reactive state in modern React?",
+        options: ["No, only class components hold state", "Yes, using the useState hook", "Only when using Redux", "Only when using Context API"],
+        answer: 1
+      }
+    ]
   },
   {
     id: 4,
@@ -121,7 +181,27 @@ export const trendingCourses = [
     lessons: 12,
     duration: "6h 30m",
     tag: "Essential",
-    link: "#"
+    link: "#",
+    quiz: [
+      {
+        id: 'q4_1',
+        question: "Which command initializes a new local Git repository?",
+        options: ["git add", "git commit", "git init", "git clone"],
+        answer: 2
+      },
+      {
+        id: 'q4_2',
+        question: "How do you stage all modified files for a commit in Git?",
+        options: ["git stage", "git add .", "git save", "git push"],
+        answer: 1
+      },
+      {
+        id: 'q4_3',
+        question: "What does the command 'git pull' do?",
+        options: ["Fetches remote updates and merges them automatically", "Only downloads remote updates", "Pushes commits to github", "Deletes branches"],
+        answer: 0
+      }
+    ]
   },
   {
     id: 5,
@@ -149,6 +229,26 @@ export const trendingCourses = [
     lessons: 28,
     duration: "14h 00m",
     tag: "Popular",
-    link: "#"
+    link: "#",
+    quiz: [
+      {
+        id: 'q5_1',
+        question: "What is the worst-case search time complexity in a skewed Binary Search Tree (BST)?",
+        options: ["O(1)", "O(log n)", "O(n)", "O(n log n)"],
+        answer: 2
+      },
+      {
+        id: 'q5_2',
+        question: "Which data structure operates on a Last-In-First-Out (LIFO) basis?",
+        options: ["Queue", "Stack", "Array", "Linked List"],
+        answer: 1
+      },
+      {
+        id: 'q5_3',
+        question: "Which sorting algorithm guarantees a worst-case time complexity of O(n log n)?",
+        options: ["Bubble Sort", "Insertion Sort", "Quick Sort", "Merge Sort"],
+        answer: 3
+      }
+    ]
   }
 ];

@@ -25,6 +25,41 @@ function App() {
     }
   });
 
+  const [completedVideos, setCompletedVideos] = useState(() => {
+    try {
+      const saved = localStorage.getItem('learnify_completed_videos');
+      return saved ? JSON.parse(saved) : {};
+    } catch (e) {
+      return {};
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem('learnify_completed_videos', JSON.stringify(completedVideos));
+  }, [completedVideos]);
+
+  const toggleVideoCompletion = (courseId, videoId) => {
+    setCompletedVideos((prev) => {
+      const courseVideos = prev[courseId] || [];
+      const updated = courseVideos.includes(videoId)
+        ? courseVideos.filter((id) => id !== videoId)
+        : [...courseVideos, videoId];
+      return { ...prev, [courseId]: updated };
+    });
+  };
+
+  useEffect(() => {
+    if (selectedCourse && activeVideo) {
+      setCompletedVideos((prev) => {
+        const courseVideos = prev[selectedCourse.id] || [];
+        if (!courseVideos.includes(activeVideo.id)) {
+          return { ...prev, [selectedCourse.id]: [...courseVideos, activeVideo.id] };
+        }
+        return prev;
+      });
+    }
+  }, [selectedCourse, activeVideo]);
+
   // Modal visibility states
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSavedOpen, setIsSavedOpen] = useState(false);
@@ -171,6 +206,8 @@ function App() {
           activeVideo={activeVideo} 
           onVideoChange={handleVideoChange}
           onBack={handleBackToCourse} 
+          completedVideos={completedVideos}
+          toggleVideoCompletion={toggleVideoCompletion}
         />
       ) : selectedCourse ? (
         <CourseDetails 
@@ -179,6 +216,7 @@ function App() {
           onStartLearning={handleStartLearning}
           isSaved={savedCourses.includes(selectedCourse.id)}
           onToggleSave={() => handleToggleSave(selectedCourse.id)}
+          completedVideos={completedVideos}
         />
       ) : (
         <>
@@ -188,6 +226,7 @@ function App() {
             onCourseClick={handleCourseClick} 
             savedCourses={savedCourses}
             onToggleSave={handleToggleSave}
+            completedVideos={completedVideos}
           />
           <About />
           <ContactSection onSuccess={() => setIsSuccessOpen(true)} />

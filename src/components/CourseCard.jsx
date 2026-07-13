@@ -1,6 +1,10 @@
 import React from 'react';
 
-const CourseCard = ({ course, onClick, isSaved, onToggleSave }) => {
+const CourseCard = ({ course, onClick, isSaved, onToggleSave, completedVideos }) => {
+  const completedCount = completedVideos && completedVideos[course.id] ? completedVideos[course.id].length : 0;
+  const totalCount = course.curriculum ? course.curriculum.length : 0;
+  const progressPercent = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
+
   return (
     <div
       data-aos="fade-up"
@@ -47,6 +51,22 @@ const CourseCard = ({ course, onClick, isSaved, onToggleSave }) => {
         <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
           {course.description}
         </p>
+
+        {completedCount > 0 && (
+          <div className="mb-4">
+            <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 mb-1">
+              <span>Progress: {progressPercent}%</span>
+              <span>{completedCount}/{totalCount} lessons</span>
+            </div>
+            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
+              <div 
+                className="bg-primary h-1.5 rounded-full transition-all duration-500" 
+                style={{ width: `${progressPercent}%` }}
+              ></div>
+            </div>
+          </div>
+        )}
+
         <div className="mt-auto">
           <div className="pt-4 border-t border-gray-100 dark:border-gray-700 flex justify-between items-center text-sm text-gray-500 dark:text-gray-400">
             <span><i className="fa-regular fa-clock mr-1"></i> {course.duration}</span>

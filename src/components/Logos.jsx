@@ -15,10 +15,21 @@ const Logos = () => {
         <p className="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-8">
           Trusted by innovative teams
         </p>
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-          {logos.map((logo) => (
-            <img key={logo.name} className="h-8 dark:invert" src={logo.src} alt={logo.name} />
-          ))}
+        <div className="relative w-full overflow-hidden flex gap-12 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+          {/* Gradient overlay fades for premium edge blending */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-white dark:from-gray-900 to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-white dark:from-gray-900 to-transparent z-10 pointer-events-none"></div>
+
+          <div className="flex animate-marquee shrink-0 gap-12 items-center py-2">
+            {logos.map((logo) => (
+              <img key={logo.name} className="h-7 md:h-8 dark:invert shrink-0 object-contain" src={logo.src} alt={logo.name} />
+            ))}
+          </div>
+          <div className="flex animate-marquee shrink-0 gap-12 items-center py-2" aria-hidden="true">
+            {logos.map((logo) => (
+              <img key={`${logo.name}-dup`} className="h-7 md:h-8 dark:invert shrink-0 object-contain" src={logo.src} alt={logo.name} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

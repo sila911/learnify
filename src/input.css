@@ -10,4 +10,18 @@
     --color-secondary: #f8fafc; /* Slate 50 */
     --color-accent: #f59e0b; /* Amber 500 */
     --color-dark-bg: #0f172a; /* Slate 900 */
+    --animate-marquee: marquee 30s linear infinite;
+
+    @keyframes marquee {
+        from { transform: translateX(0); }
+        to { transform: translateX(calc(-100% - 3rem)); }
+    }
+}
+
+.scrollbar-none::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
